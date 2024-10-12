@@ -36,7 +36,6 @@ export default function AddProject() {
         category,
         paymentMethod,
         paymentStatus : "unpaid",
-
       };
 
       const existingProjects =
