@@ -27,24 +27,13 @@ The **Freelancer Management Project** is a web application designed to manage fr
 
 ## Technologies Used
 
-- **Frontend:** HTML, CSS, JavaScript (React)
-- **Backend:** Node.js, Express (if applicable)
-- **Database:** MongoDB / MySQL / LocalStorage (depending on your implementation)
-- **Charting Library:** Chart.js / D3.js (if applicable)
+- **Frontend:** HTML, Tailwind CSS, JavaScript (React)
 
 ### Prerequisites
 
-- Node.js (version 14 or higher)
+- Node (version 14 or higher)
 - npm (Node package manager)
 
-## Getting Started
-
-To get started with the Blog App, follow these steps:
-
-### Prerequisites
-
-- Node.js (v12 or above)
-- npm (Node Package Manager)
 
 ## Installation
 
