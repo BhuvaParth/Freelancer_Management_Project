@@ -41,6 +41,20 @@ export default function Card() {
     navigate(`/editproject/${index}`);
   };
 
+  const handleStatusToggle = (index) => {
+    const updatedData = data.map((item, i) =>
+      i === index
+        ? {
+            ...item,
+            projectStatus:
+              item.projectStatus === "active" ? "inactive" : "active",
+          }
+        : item
+    );
+    setData(updatedData);
+    localStorage.setItem("projects", JSON.stringify(updatedData));
+  };
+
   const truncate = (text, maxLength) => {
     if (!text || text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
@@ -69,22 +83,27 @@ export default function Card() {
     <div className="container mx-auto px-4">
       {data.length > 0 ? (
         <div>
-          <div className="my-4">
+          <div className="my-5">
             <h2 className="text-2xl font-bold text-gray-800">
               Total Earnings: ${totalEarnings.toFixed(2)}
             </h2>
           </div>
 
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="amount" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="my-10">
+            <ResponsiveContainer width="50%" height={400}>
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="amount" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          <h2 className="text-xl font-bold my-4 mt-10">Projects</h2>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.map((item, index) => (
               <div
@@ -104,7 +123,10 @@ export default function Card() {
                   Submission Date: {truncate(item.submissionDate, 50)}
                 </p>
                 <p className="text-sm text-gray-600">
-                  payment Method: {truncate(item.paymentMethod, 50)}
+                  Payment Method: {truncate(item.paymentMethod, 50)}
+                </p>
+                <p className="text-sm text-gray-600">
+                  Project Status: {truncate(item.projectStatus, 50)}
                 </p>
                 <h4 className="text-md font-medium text-black">
                   Amount: {truncate(item.amount, 50)}
@@ -122,12 +144,24 @@ export default function Card() {
                   >
                     Delete
                   </button>
+                  <button
+                    onClick={() => handleStatusToggle(index)}
+                    className={`${
+                      item.projectStatus === "active"
+                        ? "bg-green-600"
+                        : "bg-gray-600"
+                    } text-white font-medium py-2 px-4 rounded-md shadow-md hover:${
+                      item.projectStatus === "active"
+                        ? "bg-green-700"
+                        : "bg-gray-700"
+                    } focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                  >
+                    {item.projectStatus === "active" ? "Active" : "Inactive"}
+                  </button>
                 </div>
               </div>
             ))}
           </div>
-
-          <h2 className="text-xl font-bold my-4">Category Amounts</h2>
         </div>
       ) : (
         <div className="flex justify-center items-center h-[600px]">

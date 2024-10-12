@@ -3,7 +3,7 @@ import Card from "../components/Card";
 
 export default function Home() {
   return (
-    <div>
+    <div className="mb-10">
       <Card />
     </div>
   );
